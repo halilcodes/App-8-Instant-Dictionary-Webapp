@@ -7,11 +7,10 @@ class Definition:
 
     def get(self):
         df = pd.read_csv("data.csv")
-        definitions = df.loc[df["word"] == self.term]["definition"]
-        return definitions
+        definitions = tuple(df.loc[df["word"] == self.term]["definition"].values)
+        return definitions if definitions else "not in the dictionary".title()
 
 
-df = pd.read_csv("data.csv")
-print(df.head())
 word = "acid"
-print(df.loc[df["word"] == word]["definition"])
+d = Definition(word)
+print(d.get())
